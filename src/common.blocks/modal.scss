@@ -1,18 +1,18 @@
-@use "variables" as *;
-@use "mixins";
+@use '../scss/variables' as *;
+@use '../scss/mixins';
 
 .modal {
   @include mixins.sublayer;
-  height: max-content;
-  min-height: 90vmin;
   position: absolute;
+  z-index: 100;
   display: none;
   justify-content: center;
   align-items: center;
-  background-color: $overlayBackground;
-  z-index: 100;
+  height: max-content;
+  min-height: 90vmin;
   padding-top: 5vh;
   padding-bottom: 5vh;
+  background-color: $overlayBackground;
 
   &_active {
     display: flex;
@@ -21,12 +21,12 @@
   &__container {
     @include mixins.container;
     @include mixins.flex(column);
+    position: relative;
     gap: $defaultPadding;
-    background-color: $background;
+    box-sizing: border-box;
     height: max-content;
     border-radius: 3rem;
-    box-sizing: border-box;
-    position: relative;
+    background-color: $background;
   }
 
   &__content {
@@ -35,8 +35,8 @@
 
   &__title {
     margin: 0;
-    font-size: 1.5rem;
     font-weight: 400;
+    font-size: 1.5rem;
   }
 
   &__actions {
@@ -46,11 +46,11 @@
   }
 
   &__close {
+    @include mixins.icon(2rem, 'close');
+    @include mixins.link(white, $hover);
     position: absolute;
     top: calc(#{$defaultPadding} / 2);
     right: calc(#{$defaultPadding} / 2);
-    @include mixins.icon(2rem, 'close');
-    @include mixins.link(white, $hover);
   }
 
   &__footer {
@@ -60,10 +60,10 @@
   }
 
   &__message {
-    white-space:nowrap;
     max-width: 60%;
-    text-overflow: ellipsis;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     &_error {
       color: $error;

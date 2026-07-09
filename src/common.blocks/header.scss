@@ -1,15 +1,15 @@
-@use "variables" as *;
-@use "mixins";
+@use '../scss/variables' as *;
+@use '../scss/mixins';
 
 .header {
   height: $headerHeight;
   background-color: $primary;
 
   &__container {
-    @include mixins.container(45px,45px);
+    @include mixins.container(45px, 45px);
     @include mixins.flex(row);
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
   }
 
   &__logo {
@@ -24,29 +24,28 @@
   }
 
   &__basket {
-    //@include mixins.icon($headerElementsSize, 'basket-2');
     @include mixins.link($primary, $hover);
-    background-image: url(../images/shopping_cart.svg);
-    height: 58px;
-    width: 58px;
-    border: none;
     position: relative;
+    width: 58px;
+    height: 58px;
+    border: none;
+    background-image: url(../images/shopping_cart.svg);
     cursor: pointer;
 
     &-counter {
       position: absolute;
+      top: 0;
+      right: -0.2rem;
       display: flex;
       justify-content: center;
       align-items: center;
-      top: 0;
-      right: -0.2rem;
       width: 0.8rem;
       height: 0.8rem;
+      border-radius: 100%;
+      color: $background;
+      font-weight: 600;
       font-size: 0.5rem;
       background-color: $category1;
-      color: $background;
-      border-radius: 100%;
-      font-weight: 600;
     }
   }
 }
