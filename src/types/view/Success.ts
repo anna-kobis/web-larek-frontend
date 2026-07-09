@@ -1,15 +1,15 @@
 export interface ISuccessActions {
-	onClick: (event: MouseEvent) => void;
+  onClick: (event: MouseEvent) => void;
 }
 
 export interface ISuccessData {
-	total: number;
+  total: number;
 }
 
 export interface ISuccessViewConstructor {
-	new (container: HTMLElement, actions: ISuccessActions): ISuccessView;
+  new (container: HTMLElement, actions: ISuccessActions): ISuccessView;
 }
 
 export interface ISuccessView {
-	set total(total: number);
+  set total(total: number);
 }
