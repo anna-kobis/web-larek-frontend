@@ -9,7 +9,10 @@ export class PageView extends View<IPageData> implements IPageView {
   protected _wrapper: HTMLElement;
   protected _basket: HTMLButtonElement;
 
-  constructor(container: HTMLElement, protected events: IEvents) {
+  constructor(
+    container: HTMLElement,
+    protected events: IEvents
+  ) {
     super(container);
     this._basketCounter = ensureElement<HTMLElement>('.header__basket-counter');
     this._productsList = ensureElement<HTMLElement>('.gallery');

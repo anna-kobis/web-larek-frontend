@@ -9,11 +9,7 @@ export interface IProduct {
 }
 
 export type ICategory =
-  | 'хард-скил'
-  | 'софт-скил'
-  | 'кнопка'
-  | 'дополнительное'
-  | 'другое';
+  'хард-скил' | 'софт-скил' | 'кнопка' | 'дополнительное' | 'другое';
 
 export interface IPaymentAddressForm {
   payment: 'card' | 'cash' | '';

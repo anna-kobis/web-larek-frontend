@@ -8,7 +8,10 @@ export class BasketView extends View<IBasketData> implements IBasketView {
   protected _total: HTMLElement;
   protected _button: HTMLButtonElement;
 
-  constructor(container: HTMLElement, protected events: IEvents) {
+  constructor(
+    container: HTMLElement,
+    protected events: IEvents
+  ) {
     super(container);
     this._list = ensureElement<HTMLElement>('.basket__list', container);
     this._total = ensureElement<HTMLElement>('.basket__price', container);

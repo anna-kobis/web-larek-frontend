@@ -7,7 +7,10 @@ export class FormView<T> extends View<IFormData> implements IFormView<T> {
   protected _submitButton: HTMLButtonElement;
   protected _errors: HTMLElement;
 
-  constructor(protected container: HTMLFormElement, protected events: IEvents) {
+  constructor(
+    protected container: HTMLFormElement,
+    protected events: IEvents
+  ) {
     super(container);
 
     this._submitButton = ensureElement<HTMLButtonElement>(

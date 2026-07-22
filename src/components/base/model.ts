@@ -2,7 +2,10 @@ import { IModel } from '../../types/base/model';
 import { IEvents } from '../../types/base/events';
 
 export abstract class Model<T> implements IModel {
-  constructor(data: Partial<T>, protected events: IEvents) {
+  constructor(
+    data: Partial<T>,
+    protected events: IEvents
+  ) {
     Object.assign(this, data);
   }
 
