@@ -1,6 +1,5 @@
 export type EventName = string | RegExp;
-// eslint-disable-next-line @typescript-eslint/ban-types
-export type Subscriber = Function;
+export type Subscriber = (...args: unknown[]) => void;
 
 export type EmitterEvent = {
   eventName: string;

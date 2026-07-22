@@ -9,7 +9,7 @@ export interface IModalViewConstructor {
 }
 
 export interface IModalView {
-  set content(content: HTMLElement);
+  set content(content: HTMLElement | null);
   open(): void;
   close(): void;
   render(data: IModalData): HTMLElement;

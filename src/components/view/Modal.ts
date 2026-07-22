@@ -7,7 +7,10 @@ export class ModalView extends View<IModalData> implements IModalView {
   protected _closeButton: HTMLButtonElement;
   protected _content: HTMLElement;
 
-  constructor(container: HTMLElement, protected events: IEvents) {
+  constructor(
+    container: HTMLElement,
+    protected events: IEvents
+  ) {
     super(container);
 
     this._closeButton = ensureElement<HTMLButtonElement>(
@@ -21,8 +24,9 @@ export class ModalView extends View<IModalData> implements IModalView {
     this._content.addEventListener('click', (evt) => evt.stopPropagation());
   }
 
-  set content(content: HTMLElement) {
-    this._content.replaceChildren(content);
+  set content(content: HTMLElement | null) {
+    if (content) this._content.replaceChildren(content);
+    else this._content.replaceChildren();
   }
 
   open(): void {

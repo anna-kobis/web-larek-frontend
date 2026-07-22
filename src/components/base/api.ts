@@ -14,7 +14,7 @@ export class Api {
     };
   }
 
-  protected handleResponse(response: Response): Promise<object> {
+  protected handleResponse<T = object>(response: Response): Promise<T> {
     if (response.ok) return response.json();
     else
       return response
@@ -22,18 +22,22 @@ export class Api {
         .then((data) => Promise.reject(data.error ?? response.statusText));
   }
 
-  get(uri: string) {
+  get<T>(uri: string): Promise<T> {
     return fetch(this.baseUrl + uri, {
       ...this.options,
       method: 'GET',
-    }).then(this.handleResponse);
+    }).then((response) => this.handleResponse<T>(response));
   }
 
-  post(uri: string, data: object, method: ApiPostMethods = 'POST') {
+  post<T = object>(
+    uri: string,
+    data: object,
+    method: ApiPostMethods = 'POST'
+  ): Promise<T> {
     return fetch(this.baseUrl + uri, {
       ...this.options,
       method,
       body: JSON.stringify(data),
-    }).then(this.handleResponse);
+    }).then((response) => this.handleResponse<T>(response));
   }
 }

@@ -5,6 +5,7 @@ import {
   ICardCatalogData,
   ICardCatalogView,
 } from '../../types/view/CardCatalog';
+import { ensureElement } from '../../utils/utils';
 import { CardView } from './Card';
 
 export class CardCatalogView<T = ICardCatalogData>
@@ -24,8 +25,8 @@ export class CardCatalogView<T = ICardCatalogData>
 
   constructor(container: HTMLElement, actions?: ICardActions) {
     super(container);
-    this._category = container.querySelector('.card__category');
-    this._image = container.querySelector('.card__image');
+    this._category = ensureElement<HTMLElement>('.card__category', container);
+    this._image = ensureElement<HTMLImageElement>('.card__image', container);
     if (actions?.onClick) container.addEventListener('click', actions.onClick);
   }
 

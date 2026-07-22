@@ -8,10 +8,10 @@ import {
 import { Model } from '../base/model';
 
 export class AppModel extends Model<IAppData> implements IAppModel {
-  productList: IProduct[];
-  preview: string | null;
+  productList: IProduct[] = [];
+  preview: string | null = null;
   order: Partial<IOrderForm> = {};
-  formErrors: IFormErrors;
+  formErrors: IFormErrors = {};
 
   setProductList(items: IProduct[]): void {
     this.productList = items;
@@ -38,7 +38,10 @@ export class AppModel extends Model<IAppData> implements IAppModel {
   }
 
   getTotalPrice(): number {
-    return this.getBasketItems().reduce((sum, item) => sum + item.price, 0);
+    return this.getBasketItems().reduce(
+      (sum, item) => sum + (item.price ?? 0),
+      0
+    );
   }
 
   setOrderField<T extends keyof IOrderForm>(

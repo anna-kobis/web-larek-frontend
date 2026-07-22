@@ -12,7 +12,7 @@ export class AppApi extends Api implements IAppAPI {
   }
 
   getProductsList(): Promise<IProduct[]> {
-    return this.get('/product').then((data: ApiListResponse<IProduct>) =>
+    return this.get<ApiListResponse<IProduct>>('/product').then((data) =>
       data.items.map((item) => ({
         ...item,
         image: this.imageUrl + item.image,
@@ -21,13 +21,13 @@ export class AppApi extends Api implements IAppAPI {
   }
 
   getProductItem(id: string): Promise<IProduct> {
-    return this.get(`/product/${id}`).then((item: IProduct) => ({
+    return this.get<IProduct>(`/product/${id}`).then((item) => ({
       ...item,
       image: this.imageUrl + item.image,
     }));
   }
 
   postOrder(order: IOrder): Promise<IOrderResult> {
-    return this.post('/order', order).then((data: IOrderResult) => data);
+    return this.post<IOrderResult>('/order', order);
   }
 }
