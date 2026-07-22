@@ -122,7 +122,7 @@ events.on('backet:change', () => {
 
     return card.render({
       title: item.title,
-      price: item.price,
+      price: item.price ?? undefined,
       index: index + 1,
     });
   });

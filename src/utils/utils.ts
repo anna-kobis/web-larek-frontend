@@ -64,7 +64,9 @@ export function cloneTemplate<T extends HTMLElement>(
   query: string | HTMLTemplateElement
 ): T {
   const template = ensureElement(query) as HTMLTemplateElement;
-  return template.content.firstElementChild.cloneNode(true) as T;
+  const element =
+    template.content.firstElementChild ?? document.createElement('template');
+  return element.cloneNode(true) as T;
 }
 
 export function bem(
@@ -112,12 +114,13 @@ export function setElementData<T extends Record<string, unknown> | object>(
  */
 export function getElementData<T extends Record<string, unknown>>(
   el: HTMLElement,
-  scheme: Record<string, Function> // eslint-disable-line @typescript-eslint/ban-types
+  scheme: Record<string, (value: string | undefined) => unknown>
 ): T {
   const data: Partial<T> = {};
 
   for (const key in el.dataset) {
-    data[key as keyof T] = scheme[key](el.dataset[key]);
+    if (key in scheme)
+      data[key as keyof T] = scheme[key](el.dataset[key]) as T[keyof T];
   }
 
   return data as T;
