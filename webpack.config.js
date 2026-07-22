@@ -1,16 +1,21 @@
 const path = require('path');
+const fs = require('fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { DefinePlugin } = require('webpack');
 const TerserPlugin = require('terser-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-require('dotenv').config({
-  path: path.join(
-    process.cwd(),
-    process.env.NODE_ENV ? `.env.${process.env.NODE_ENV}` : '.env'
-  ),
-});
+const env = process.env.NODE_ENV;
+const specificEnvPath = env ? path.join(process.cwd(), `.env.${env}`) : null;
+const defaultEnvPath = path.join(process.cwd(), '.env');
+
+const targetPath =
+  specificEnvPath && fs.existsSync(specificEnvPath)
+    ? specificEnvPath
+    : defaultEnvPath;
+
+require('dotenv').config({ path: targetPath });
 
 const isProduction = process.env.NODE_ENV == 'production';
 const stylesHandler = MiniCssExtractPlugin.loader;
@@ -25,7 +30,8 @@ const config = {
 
   devServer: {
     open: true,
-    host: 'localhost',
+    host: '127.0.0.1',
+    port: 8080,
     watchFiles: ['src/pages/*.html'],
     hot: true,
   },
